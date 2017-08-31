@@ -1,4 +1,4 @@
-package: github.com/jeffpak/persi-disaster-recovery-acceptance-tests
+package: github.com/cloudfoundry-incubator/persi-disaster-recovery-acceptance-tests
 import:
 - package: github.com/onsi/ginkgo
 - package: github.com/onsi/gomega
