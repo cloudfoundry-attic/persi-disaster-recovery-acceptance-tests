@@ -4,7 +4,6 @@ import (
 
 	. "github.com/cloudfoundry-incubator/disaster-recovery-acceptance-tests/common"
 	"os"
-	"path/filepath"
 	"fmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
