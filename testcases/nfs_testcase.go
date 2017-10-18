@@ -38,7 +38,7 @@ func (tc *NFSTestCase) BeforeBackup(config Config) {
 
 func (tc *NFSTestCase) AfterBackup(config Config) {
 	By("nfs after backup")
-	RunCommandSuccessfully("cf delete-service " + config.InstanceName + " -f")
+	RunCommandSuccessfully("cf delete-service " + tc.instanceName + " -f")
 }
 
 func (tc *NFSTestCase) AfterRestore(config Config) {
