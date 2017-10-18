@@ -7,9 +7,6 @@ import (
 	"fmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/go-sql-driver/mysql"
-	"time"
-	"database/sql"
 )
 
 type NFSTestCase struct {
@@ -41,26 +38,7 @@ func (tc *NFSTestCase) BeforeBackup(config Config) {
 
 func (tc *NFSTestCase) AfterBackup(config Config) {
 	By("nfs after backup")
-
-	dbConnectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", os.Getenv("DB_USERNAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"))
-	cfg, err := mysql.ParseDSN(dbConnectionString)
-	Expect(err).NotTo(HaveOccurred())
-
-	cfg.Timeout = 10 * time.Minute
-	cfg.ReadTimeout = 10 * time.Minute
-	cfg.WriteTimeout = 10 * time.Minute
-	dbConnectionString = cfg.FormatDSN()
-
-	sqlDB, err := sql.Open("mysql", dbConnectionString)
-	Expect(err).NotTo(HaveOccurred())
-
-	_, err = sqlDB.Exec(`
-			DROP TABLE service_instances
-	`)
-	Expect(err).NotTo(HaveOccurred())
-
-  err = sqlDB.Close()
-	Expect(err).NotTo(HaveOccurred())
+	RunCommandSuccessfully("cf delete-service " + config.InstanceName + " -f")
 }
 
 func (tc *NFSTestCase) AfterRestore(config Config) {
