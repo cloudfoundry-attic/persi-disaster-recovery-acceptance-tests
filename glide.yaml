@@ -7,4 +7,4 @@ import:
 - package: gopkg.in/yaml.v1
 - package: github.com/smallfish/simpleyaml
 - package: github.com/totherme/unstructured
-
+- package: github.com/cloudfoundry-incubator/disaster-recovery-acceptance-tests
